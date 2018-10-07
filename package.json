@@ -1,14 +1,14 @@
 {
-    "name": "cpuload.ahk",
+    "name": "ahk-unittest.ahk",
     "version": "0.1.0",
-    "description": "Class to poll the current CPU load",
-    "main": "app.ahk",
+    "description": "Class perform and report unit tests",
+    "main": "ahk-unittest.ahk",
     "scripts": {
         "newinstall": "yarn install --modules-folder ./lib"
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/Chunjee/cpuload.ahk"
+        "url": "https://github.com/Chunjee/ahk-unittest.ahk"
     },
     "dependencies": { },
     
