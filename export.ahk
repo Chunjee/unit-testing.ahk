@@ -1,4 +1,4 @@
-Class unittest_class {
+Class unittesting {
 	
 	__New() {
         this.testtotal := 0
