@@ -1,14 +1,14 @@
 {
     "name": "unit-testing.ahk",
-    "version": "1.0.0",
-    "description": "Class to perform and report basic unit tests",
+    "version": "0.2.0",
+    "description": "Class to perform and report unit tests",
     "main": "export.ahk",
     "scripts": {
         "newinstall": "yarn install --modules-folder ./lib"
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/Chunjee/ahk-unittesting.ahk"
+        "url": "https://github.com/Chunjee/unit-testing.ahk"
     },
     "dependencies": { },
     "author": "Shawn Brooker",

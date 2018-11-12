@@ -1,4 +1,4 @@
-Class unittesting {
+class unittesting {
 	
 	__New() {
         this.testtotal := 0
@@ -21,7 +21,8 @@ Class unittesting {
             return 1
         } else {
             this.failtotal++
-            this.log.push("Test Number: -" this.testtotal "-`n`r")
+            this.log.push("Test Number: " this.testtotal "`n`r")
+            this.log.push("Function: " A_ThisFunc "`n`r")
             this.log.push("Expected: " para_2 "`n`r")
             this.log.push("Actual: " para_1 "`n`r")
             this.log.push("`n`r`n`r")
