@@ -24,7 +24,6 @@ class unittesting {
         } else {
             this.failtotal++
             this.log.push("Test Number: " this.testtotal "`n`r")
-            ; this.log.push("Function: " A_ThisFunc "`n`r")
             this.log.push("Expected: " JSON.stringify(para_2) "`n`r")
             this.log.push("Actual: " JSON.stringify(para_1) "`n`r")
             this.log.push("`n`r`n`r")
