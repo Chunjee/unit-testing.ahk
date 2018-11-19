@@ -11,6 +11,8 @@ class unittesting {
 
 
 	test(para_1, para_2) {
+        global
+
         if ( A_IsCompiled ) {
             return 0
         }
@@ -22,9 +24,9 @@ class unittesting {
         } else {
             this.failtotal++
             this.log.push("Test Number: " this.testtotal "`n`r")
-            this.log.push("Function: " A_ThisFunc "`n`r")
-            this.log.push("Expected: " para_2 "`n`r")
-            this.log.push("Actual: " para_1 "`n`r")
+            ; this.log.push("Function: " A_ThisFunc "`n`r")
+            this.log.push("Expected: " JSON.stringify(para_2) "`n`r")
+            this.log.push("Actual: " JSON.stringify(para_1) "`n`r")
             this.log.push("`n`r`n`r")
             return 0
         }
@@ -65,7 +67,8 @@ class unittesting {
         
         loop % this.log.MaxIndex()
         {
-            FileAppend, this.log[A_Index], %logresult_dir%
+            line := this.log[A_Index]
+            FileAppend, %line%, %logresult_dir%
             msgreport .= this.log[A_Index]
         }
         msgbox % msgreport

@@ -1,6 +1,6 @@
 {
     "name": "unit-testing.ahk",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "description": "Class to perform and report unit tests",
     "main": "export.ahk",
     "scripts": {
