@@ -1,4 +1,4 @@
-assert.ahk
+unit-testing.ahk
 ===========
 
 A unit test framework for AutoHotkey
