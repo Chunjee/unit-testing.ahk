@@ -1,9 +1,9 @@
 class unittesting {
 	
 	__New() {
-        this.testtotal := 0
-        this.failtotal := 0
-        this.successtotal := 0
+		this.testtotal := 0
+		this.failtotal := 0
+		this.successtotal := 0
 
 		this.log := []
 		this.Info_Array := []
@@ -16,20 +16,32 @@ class unittesting {
         if ( A_IsCompiled ) {
             return 0
         }
+	
+        para_1 := JSON.stringify(para_1)
+        para_2 := JSON.stringify(para_2)
 
+        
         this.testtotal += 1
         if (para_1 = para_2) {
             this.successtotal++
             return 1
         } else {
             this.failtotal++
-            this.log.push("Test Number: " this.testtotal "`n`r")
-            this.log.push("Expected: " JSON.stringify(para_2) "`n`r")
-            this.log.push("Actual: " JSON.stringify(para_1) "`n`r")
-            this.log.push("`n`r`n`r")
+            if (this.label != this.lastlabel) {
+                this.lastlabel := this.label
+                this.log.push("`r`n== " this.label " ==`r`n")
+            }
+            this.log.push("Test Number: " this.testtotal "`r`n")
+            this.log.push("Expected: " JSON.stringify(para_2) "`r`n")
+            this.log.push("Actual: " JSON.stringify(para_1) "`r`n")
+            this.log.push("`r`n")
             return 0
         }
 	}
+
+    label(para_label) {
+        this.label := para_label
+    }
 
     buildreport() {
         if ( A_IsCompiled ) {
@@ -61,7 +73,7 @@ class unittesting {
         FileDelete, % logresult_dir
         msgreport := this.buildreport()
         if (this.failtotal > 0) {
-            msgreport .= "`n`r=================================`n`r"
+            msgreport .= "`r`n=================================`r`n"
         }
         
         loop % this.log.MaxIndex()
