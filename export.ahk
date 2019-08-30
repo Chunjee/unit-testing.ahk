@@ -32,8 +32,8 @@ class unittesting {
                 this.log.push("`r`n== " this.label " ==`r`n")
             }
             this.log.push("Test Number: " this.testtotal "`r`n")
-            this.log.push("Expected: " JSON.stringify(para_2) "`r`n")
-            this.log.push("Actual: " JSON.stringify(para_1) "`r`n")
+            this.log.push("Expected: " para_2 "`r`n")
+            this.log.push("Actual: " para_1 "`r`n")
             this.log.push("`r`n")
             return 0
         }
