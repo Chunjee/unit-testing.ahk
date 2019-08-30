@@ -7,6 +7,9 @@ class unittesting {
 
 		this.log := []
 		this.Info_Array := []
+
+		this.labelvar := ""
+		this.lastlabelvar := ""
 	}
 
 
@@ -24,23 +27,40 @@ class unittesting {
         this.testtotal += 1
         if (para_1 = para_2) {
             this.successtotal++
-            return 1
+            return true
         } else {
             this.failtotal++
-            if (this.label != this.lastlabel) {
-                this.lastlabel := this.label
-                this.log.push("`r`n== " this.label " ==`r`n")
+            if (this.labelvar != this.lastlabelvar) {
+                this.lastlabelvar := this.labelvar
+                this.log.push("`r`n== " this.labelvar " ==`r`n")
             }
             this.log.push("Test Number: " this.testtotal "`r`n")
             this.log.push("Expected: " para_2 "`r`n")
             this.log.push("Actual: " para_1 "`r`n")
             this.log.push("`r`n")
-            return 0
+            return false
         }
 	}
 
+    true(para_1) {
+        if (para_1) {
+            this.test("true","false")
+        } else {
+            this.test("true","true")
+        }
+    }
+
+    false(para_1) {
+        if (!para_1) {
+            this.test("false","true")
+        } else {
+            this.test("false","false")
+        }
+    }
+
     label(para_label) {
-        this.label := para_label
+        this.labelvar :=  para_label
+        return
     }
 
     buildreport() {
