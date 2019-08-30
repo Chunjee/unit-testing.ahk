@@ -13,19 +13,19 @@ class unittesting {
 	}
 
 
-	test(para_1, para_2) {
+	test(para_actual, para_expected) {
         global
 
         if ( A_IsCompiled ) {
             return 0
         }
 	
-        para_1 := JSON.stringify(para_1)
-        para_2 := JSON.stringify(para_2)
+        para_actual := JSON.stringify(para_actual)
+        para_expected := JSON.stringify(para_expected)
 
         
         this.testtotal += 1
-        if (para_1 = para_2) {
+        if (para_actual = para_expected) {
             this.successtotal++
             return true
         } else {
@@ -35,8 +35,8 @@ class unittesting {
                 this.log.push("`r`n== " this.labelvar " ==`r`n")
             }
             this.log.push("Test Number: " this.testtotal "`r`n")
-            this.log.push("Expected: " para_2 "`r`n")
-            this.log.push("Actual: " para_1 "`r`n")
+            this.log.push("Expected: " para_expected "`r`n")
+            this.log.push("Actual: " para_actual "`r`n")
             this.log.push("`r`n")
             return false
         }
@@ -44,17 +44,17 @@ class unittesting {
 
     true(para_1) {
         if (para_1) {
-            this.test("true","false")
-        } else {
             this.test("true","true")
+        } else {
+            this.test("false","true")
         }
     }
 
     false(para_1) {
         if (!para_1) {
-            this.test("false","true")
-        } else {
             this.test("false","false")
+        } else {
+            this.test("true","false")
         }
     }
 
