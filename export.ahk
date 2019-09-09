@@ -65,12 +65,12 @@ class unittesting {
             return 0
         }
 	
-        para_1 := JSON.stringify(para_actual)
-        para_2 := JSON.stringify(para_expected)
+        para_1 := JSON.stringify(para_1)
+        para_2 := JSON.stringify(para_2)
 
         
         this.testtotal += 1
-        if (para_actual != para_expected) {
+        if (para_1 != para_2) {
             this.successtotal++
             return true
         } else {
@@ -80,8 +80,8 @@ class unittesting {
                 this.log.push("`r`n== " this.labelvar " ==`r`n")
             }
             this.log.push("Test Number: " this.testtotal "`r`n")
-            this.log.push("Input1: " para_expected "`r`n")
-            this.log.push("Input2: " para_actual "`r`n")
+            this.log.push("Input1: " para_1 "`r`n")
+            this.log.push("Input2: " para_2 "`r`n")
             this.log.push("They were Expected to be DIFFERENT")
             this.log.push("`r`n")
             return false
