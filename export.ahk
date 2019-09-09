@@ -58,6 +58,36 @@ class unittesting {
         }
     }
 
+    notequal(para_1, para_2) {
+        global
+
+        if ( A_IsCompiled ) {
+            return 0
+        }
+	
+        para_1 := JSON.stringify(para_actual)
+        para_2 := JSON.stringify(para_expected)
+
+        
+        this.testtotal += 1
+        if (para_actual != para_expected) {
+            this.successtotal++
+            return true
+        } else {
+            this.failtotal++
+            if (this.labelvar != this.lastlabelvar) {
+                this.lastlabelvar := this.labelvar
+                this.log.push("`r`n== " this.labelvar " ==`r`n")
+            }
+            this.log.push("Test Number: " this.testtotal "`r`n")
+            this.log.push("Input1: " para_expected "`r`n")
+            this.log.push("Input2: " para_actual "`r`n")
+            this.log.push("They were Expected to be DIFFERENT")
+            this.log.push("`r`n")
+            return false
+        }
+	}
+
     label(para_label) {
         this.labelvar :=  para_label
         return
