@@ -28,6 +28,11 @@ assert := new unittesting()
 assert.test("StringExample", "StringExample")
 assert.test((1 > 0 ), true)
 
+assert.true((1 == 1))
+assert.false((1 != 1))
+
+assert.notequal(true,false)
+
 assert.report()
 assert.fullreport()
 ```
