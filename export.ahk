@@ -97,7 +97,7 @@ class unittesting {
         if ( A_IsCompiled ) {
             return 0
         }
-        this.percentsuccess := Ceil( ( this.successtotal / this.testtotal ) * 100 )
+        this.percentsuccess := floor( ( this.successtotal / this.testtotal ) * 100 )
         returntext := this.testtotal " tests completed with " this.percentsuccess "% success"
         if (this.failtotal = 1) {
             returntext .= " (" this.failtotal " failure)"
