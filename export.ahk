@@ -19,10 +19,12 @@ class unittesting {
         if ( A_IsCompiled ) {
             return 0
         }
-	
-        para_actual := JSON.stringify(para_actual)
-        para_expected := JSON.stringify(para_expected)
-
+        if (IsObject(para_actual)) {
+            para_actual := JSON.stringify(para_actual)
+        }
+        if (IsObject(para_expected)) {
+            para_expected := JSON.stringify(para_expected)
+        }
         
         this.testtotal += 1
         if (para_actual = para_expected) {
