@@ -10,7 +10,9 @@
         "type": "git",
         "url": "https://github.com/Chunjee/unit-testing.ahk"
     },
-    "dependencies": { },
+    "dependencies": { 
+        "json.ahk": "github:chunjee/json.ahk"
+    },
     "author": "Shawn Brooker",
     "license": "MIT"
 }
