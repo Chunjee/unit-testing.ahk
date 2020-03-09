@@ -5,11 +5,24 @@ A unit test framework for AutoHotkey
 
 ## Installation
 
-In a terminal or command line navigated to your project folder:
-
-```shell
+In a terminal or command line:
+```bash
 npm install unit-testing.ahk
 ```
+
+In your code:
+```autohotkey
+#Include %A_ScriptDir%\node_modules
+#Include unit-testing.ahk\export.ahk
+#Include JSON.ahk\export.ahk
+assert := new unittesting.ahk
+
+testVar := 1
+assert.equal(1, testVar)
+assert.fullReport()
+```
+You may also review or copy the library from [./export.ahk on GitHub](https://github.com/Chunjee/unit-testing.ahk)
+
 
 ## Usage
 
