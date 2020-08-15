@@ -11,10 +11,10 @@ assert.test(["hello"], ["hello"])
 assert.test({"key": "value"}, {"key": "value"})
 
 
-; assert.label("equal - vars, arrays, objects")
-; assert.equal("hello", "hello")
-; assert.equal(["hello"], ["hello"])
-; assert.equal({"key": "value"}, {"key": "value"})
+assert.label("equal - vars, arrays, objects")
+assert.equal("hello", "hello")
+assert.equal(["hello"], ["hello"])
+assert.equal({"key": "value"}, {"key": "value"})
 
 
 assert.label("notEqual - vars, arrays, objects")

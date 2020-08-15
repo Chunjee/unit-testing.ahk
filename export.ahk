@@ -44,6 +44,7 @@ class unittesting {
 		}
 	}
 
+
 	true(param_1) {
 		if (param_1) {
 			this.test("true","true")
@@ -54,6 +55,7 @@ class unittesting {
 		}
 	}
 
+
 	false(param_1) {
 		if (!param_1) {
 			this.test("false","false")
@@ -63,6 +65,12 @@ class unittesting {
 			return false
 		}
 	}
+
+
+	equal(param_actual, param_expected) {
+		return this.test(param_actual, param_expected)
+	}
+
 
 	notEqual(param_actual, param_expected) {
 		if (A_IsCompiled) {
@@ -92,6 +100,7 @@ class unittesting {
 		}
 	}
 
+
 	undefined(param_1) {
 		if (A_IsCompiled) {
 			return 0
@@ -117,6 +126,7 @@ class unittesting {
 		}
 	}
 
+
 	label(para_label) {
 		if (A_IsCompiled) {
 			return 0
@@ -125,6 +135,7 @@ class unittesting {
 		this.labelvar :=  para_label
 		return
 	}
+
 
 	buildReport() {
 		if (A_IsCompiled) {

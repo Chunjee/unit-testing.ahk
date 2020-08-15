@@ -17,7 +17,7 @@ In your code:
 assert := new unittesting.ahk
 
 testVar := 1
-assert.equal(1, testVar)
+assert.test(testVar, 1)
 assert.fullReport()
 ```
 You may also review or copy the library from [./export.ahk on GitHub](https://github.com/Chunjee/unit-testing.ahk)
@@ -50,6 +50,9 @@ assert.writeTestResultsToFile()
 ## API
 
 ### .equal(actual, expected)
+
+Alias: .test
+
 checks if actual and expected are the same or equal. The comparison is case-insensitive when ahk is `inStringCaseSense, Off` (default ahk behavior)
 
 ##### Arguments
