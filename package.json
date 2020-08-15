@@ -1,18 +1,13 @@
 {
     "name": "unit-testing.ahk",
-    "version": "0.3.0",
-    "description": "Class to perform and report unit tests",
+    "version": "0.4.0",
+    "description": "Simple unit testing class to perform and report tests for AutoHotkey projects",
     "main": "export.ahk",
-    "scripts": {
-        "newinstall": "yarn install --modules-folder ./lib"
-    },
     "repository": {
         "type": "git",
-        "url": "https://github.com/Chunjee/unit-testing.ahk"
+        "url": "https://github.com/Chunjee/unit-testing.ahk.git"
     },
-    "dependencies": { 
-        "json.ahk": "github:chunjee/json.ahk"
-    },
+    "dependencies": { },
     "author": "Shawn Brooker",
     "license": "MIT"
 }
