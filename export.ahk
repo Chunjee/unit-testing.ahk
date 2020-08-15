@@ -45,8 +45,8 @@ class unittesting {
 	}
 
 
-	true(param_1) {
-		if (param_1) {
+	true(param_actual) {
+		if (param_actual) {
 			this.test("true","true")
 			return true
 		} else {
@@ -56,8 +56,8 @@ class unittesting {
 	}
 
 
-	false(param_1) {
-		if (!param_1) {
+	false(param_actual) {
+		if (!param_actual) {
 			this.test("false","false")
 			return true
 		} else {
@@ -101,23 +101,23 @@ class unittesting {
 	}
 
 
-	undefined(param_1) {
+	undefined(param_actual) {
 		if (A_IsCompiled) {
 			return 0
 		}
 
 		this.testtotal += 1
-		if (IsObject(param_1)) {
-			param_1 := this._print(param_1)
-			if (StrLen(param_1) > 0) {
-				param_1 := "(Object)"
+		if (IsObject(param_actual)) {
+			param_actual := this._print(param_actual)
+			if (StrLen(param_actual) > 0) {
+				param_actual := "(Object)"
 			}
 		}
-		if (param_1 != "") {
+		if (param_actual != "") {
 			this.failtotal++
 			this.log.push("`n== " this.labelvar " ==`n")
 			this.log.push("Test Number: " this.testtotal "`n")
-			this.log.push("Input: " param_1 "`n")
+			this.log.push("Input: " param_actual "`n")
 			this.log.push("Expected to be """"")
 			return false
 		} else {
