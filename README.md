@@ -5,7 +5,7 @@ A unit test framework for AutoHotkey
 
 ## Installation
 
-In a terminal or command line:
+In a terminal or command line navigated to your project folder:
 ```bash
 npm install unit-testing.ahk
 ```
@@ -14,7 +14,6 @@ In your code:
 ```autohotkey
 #Include %A_ScriptDir%\node_modules
 #Include unit-testing.ahk\export.ahk
-#Include JSON.ahk\export.ahk
 assert := new unittesting.ahk
 
 testVar := 1
@@ -56,11 +55,11 @@ checks if actual and expected are the same or equal. The comparison is case-inse
 ##### Arguments
 1. actual (*): The actual value computed
 2. expected (*): The expected value
-  
+
 ##### Returns
 (boolean): returns true if the values were the same, else false
 
-##### Example  
+##### Example
 ```autohotkey
 assert.equal("string", "tsring")
 ; → false
@@ -75,11 +74,11 @@ checks if actual value is true.
 
 ##### Arguments
 1. actual (*): The actual value computed
-  
+
 ##### Returns
 (boolean): returns true if the value is true, else false
 
-##### Example  
+##### Example
 ```autohotkey
 assert.true((1 == 1))
 ; → true
@@ -94,11 +93,11 @@ checks if actual value is false.
 
 ##### Arguments
 1. actual (*): The actual value computed
-  
+
 ##### Returns
 (boolean): returns true if the value is false, else false
 
-##### Example  
+##### Example
 ```autohotkey
 assert.false((1 != 1))
 ; → true
@@ -118,7 +117,26 @@ checks if actual and expected are NOT the same or equal. The comparison is case-
 ##### Returns
 (boolean): returns true if the value is false, else false
 
-##### Example  
+##### Example
+```autohotkey
+assert.false((1 != 1))
+; → true
+
+assert.false(InStr("String", "X"))
+; → true
+```
+
+
+### .undefined(actual)
+checks if actual is undefined (`""`).
+
+##### Arguments
+1. actual (*): The actual value computed
+
+##### Returns
+(boolean): returns true if the value is `""`, else false
+
+##### Example
 ```autohotkey
 assert.false((1 != 1))
 ; → true
@@ -135,7 +153,7 @@ checks if actual and expected are NOT the same or equal. The comparison is case-
 1. label (string): A human readable label for the next test(s) in sequence
 
 
-##### Example  
+##### Example
 ```autohotkey
 assert.label("InStr Tests")
 
@@ -147,7 +165,7 @@ assert.true(InStr("String", "tring"))
 ### .report()
 Uses msgbox to display the results of all tests
 
-##### Example  
+##### Example
 ```autohotkey
 assert.true(InStr("String", "S"))
 
@@ -162,12 +180,12 @@ assert.report()
 ### .fullReport()
 Uses msgbox to display the results of all tests with details of any failures
 
-##### Example  
+##### Example
 ```autohotkey
 assert.true(InStr("String", "X"))
 
 assert.fullReport()
-; → 
+; →
 /*---------------------------
 1 tests completed with 0% success (1 failure)
 =================================
@@ -184,7 +202,7 @@ writes test results to a file
 ##### Arguments
 1. filepath (string): The file path to write all tests results to
 
-##### Example  
+##### Example
 ```autohotkey
 assert.true(InStr("String", "X"))
 
