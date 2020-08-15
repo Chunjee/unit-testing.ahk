@@ -19,6 +19,7 @@ class unittesting {
 		if (A_IsCompiled) {
 			return 0
 		}
+
 		if (IsObject(para_actual)) {
 			para_actual := this._print(para_actual)
 		}
@@ -46,6 +47,10 @@ class unittesting {
 
 
 	true(param_actual) {
+		if (A_IsCompiled) {
+			return 0
+		}
+
 		if (param_actual) {
 			this.test("true","true")
 			return true
@@ -57,6 +62,10 @@ class unittesting {
 
 
 	false(param_actual) {
+		if (A_IsCompiled) {
+			return 0
+		}
+
 		if (!param_actual) {
 			this.test("false","false")
 			return true
@@ -68,6 +77,10 @@ class unittesting {
 
 
 	equal(param_actual, param_expected) {
+		if (A_IsCompiled) {
+			return 0
+		}
+
 		return this.test(param_actual, param_expected)
 	}
 
