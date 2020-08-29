@@ -212,7 +212,7 @@ class unittesting {
 					output .= key . ":"
 				}
 				if (IsObject(value)) {
-					output .= "[" . this._printObj(value) . "]"
+					output .= "[" . this._print(value) . "]"
 				} else if value is not Number
 				{
 					output .= """" . value . """"
