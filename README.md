@@ -16,11 +16,11 @@ In your code:
 #Include unit-testing.ahk\export.ahk
 assert := new unittesting.ahk
 
-testVar := 1
-assert.test(testVar, 1)
+testVar := 2 + 2
+assert.equal(testVar, 4)
 assert.fullReport()
 ```
-You may also review or copy the library from [./export.ahk on GitHub](https://github.com/Chunjee/unit-testing.ahk)
+You may also review or copy the library from [./export.ahk on GitHub](https://github.com/Chunjee/unit-testing.ahk); #Include as you would normally when manually downloading.
 
 
 ## Usage
@@ -30,12 +30,12 @@ Grants access to a class named `unittesting` with the following methods: `.equal
 ```autohotkey
 assert := new unittesting()
 
-; .test checks and logs whether or not both arguments are equal
+; .equal checks and logs whether or not both arguments are the same
 assert.label("string comparison")
-assert.test("StringExample", "StringExample")
+assert.equal("StringExample", "StringExample")
 
 assert.label("value testing")
-assert.test((1 > 0 ), true)
+assert.equal((1 > 0 ), true)
 
 assert.label("true/false testing")
 assert.true((1 == 1))
@@ -51,7 +51,7 @@ assert.writeTestResultsToFile()
 
 ### .equal(actual, expected)
 
-Alias: .test
+Alias: `.test`
 
 checks if actual and expected are the same or equal. The comparison is case-insensitive when ahk is `inStringCaseSense, Off` (default ahk behavior)
 
@@ -65,10 +65,10 @@ checks if actual and expected are the same or equal. The comparison is case-inse
 ##### Example
 ```autohotkey
 assert.equal("string", "tsring")
-; → false
+; => false
 
 assert.equal((1 > 0 ), true)
-; → true
+; => true
 ```
 
 
@@ -84,10 +84,10 @@ checks if actual value is true.
 ##### Example
 ```autohotkey
 assert.true((1 == 1))
-; → true
+; => true
 
 assert.true(InStr("String", "S"))
-; → true
+; => true
 ```
 
 
@@ -103,10 +103,10 @@ checks if actual value is false.
 ##### Example
 ```autohotkey
 assert.false((1 != 1))
-; → true
+; => true
 
 assert.false(InStr("String", "X"))
-; → true
+; => true
 ```
 
 
@@ -123,10 +123,10 @@ checks if actual and expected are NOT the same or equal. The comparison is case-
 ##### Example
 ```autohotkey
 assert.false((1 != 1))
-; → true
+; => true
 
 assert.false(InStr("String", "X"))
-; → true
+; => true
 ```
 
 
@@ -142,15 +142,15 @@ checks if actual is undefined (`""`).
 ##### Example
 ```autohotkey
 assert.false((1 != 1))
-; → true
+; => true
 
 assert.false(InStr("String", "X"))
-; → true
+; => true
 ```
 
 
 ### .label(label)
-checks if actual and expected are NOT the same or equal. The comparison is case-insensitive when ahk is `inStringCaseSense, Off` (default ahk behavior)
+labels the following tests for logs and readability
 
 ##### Arguments
 1. label (string): A human readable label for the next test(s) in sequence
@@ -158,10 +158,18 @@ checks if actual and expected are NOT the same or equal. The comparison is case-
 
 ##### Example
 ```autohotkey
-assert.label("InStr Tests")
+assert.label("string comparisons")
 
-assert.true(InStr("String", "S"))
-assert.true(InStr("String", "tring"))
+assert.equal("String", "s")
+assert.fullReport()
+/*---------------------------
+1 tests completed with 0% success (1 failure)
+=================================
+== string comparisons ==
+Test Number: 1
+Expected: s
+Actual: String
+---------------------------*/
 ```
 
 
@@ -173,7 +181,6 @@ Uses msgbox to display the results of all tests
 assert.true(InStr("String", "S"))
 
 assert.report()
-; →
 /*---------------------------
 1 test completed with 100% success
 ---------------------------*/
@@ -188,7 +195,6 @@ Uses msgbox to display the results of all tests with details of any failures
 assert.true(InStr("String", "X"))
 
 assert.fullReport()
-; →
 /*---------------------------
 1 tests completed with 0% success (1 failure)
 =================================
@@ -203,14 +209,13 @@ Actual: false
 writes test results to a file
 
 ##### Arguments
-1. filepath (string): The file path to write all tests results to
+1. filepath (string): Optional, The file path to write all tests results to, the default is `A_ScriptDir "\result.tests.log"`
 
 ##### Example
 ```autohotkey
 assert.true(InStr("String", "X"))
 
 assert.writeTestResultsToFile()
-; → testresults.log
 /*Test Number: 1
 Expected: true
 Actual: false*/

@@ -194,10 +194,22 @@ class unittesting {
 		return msgreport
 	}
 
-	writeTestResultsToFile() {
-		FileDelete, % this.logresult_dir
+	writeTestResultsToFile(param_filepath:="") {
+		if (A_IsCompiled) {
+			return 0
+		}
+
+		if (param_filepath != "") {
+			logpath := param_filepath
+		} else {
+			logpath := this.logresult_dir
+		}
+		
+		FileDelete, % logpath
+		msgreport := this.buildreport()
+		FileAppend, %msgreport%, % logpath
 		for key, value in this.log {
-			FileAppend, %Value%, % this.logresult_dir
+			FileAppend, %value%, % logpath
 		}
 		return true
 	}
