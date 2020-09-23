@@ -43,7 +43,9 @@ assert.label("undefined - detect undefined value")
 assert.undefined("")
 assert.undefined(undefinedVar)
 
+assert.test("String", "s")
+assert.fullReport()
 
-; assert.writeTestResultsToFile()
+assert.writeTestResultsToFile()
 assert.fullReport()
 ExitApp
