@@ -29,6 +29,8 @@ assert.true(1)
 assert.label("true - expressions")
 assert.true((1 == 1))
 assert.true((1 != 0))
+assert.label("true - Function")
+assert.test(inStr("String", "s"))
 
 
 assert.label("false - vars")
@@ -43,8 +45,6 @@ assert.label("undefined - detect undefined value")
 assert.undefined("")
 assert.undefined(undefinedVar)
 
-assert.test("String", "s")
-assert.fullReport()
 
 assert.writeTestResultsToFile()
 assert.fullReport()
