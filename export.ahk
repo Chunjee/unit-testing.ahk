@@ -51,13 +51,16 @@ class unittesting {
 			return 0
 		}
 
-		if (param_actual) {
-			this.test("true","true")
+		if (param_actual == true) {
+			this.test("true", "true")
 			return true
-		} else {
-			this.test("false","true")
+		}
+		if (param_actual == false){
+			this.test("false", "true")
 			return false
 		}
+		this.test(param_actual, "true")
+		return false
 	}
 
 
@@ -66,13 +69,16 @@ class unittesting {
 			return 0
 		}
 
-		if (!param_actual) {
-			this.test("false","false")
+		if (param_actual == false) {
+			this.test("false", "false")
 			return true
-		} else {
-			this.test("true","false")
+		}
+		if (param_actual == true){
+			this.test("true", "false")
 			return false
 		}
+		this.test(param_actual, "true")
+		return false
 	}
 
 
@@ -194,6 +200,7 @@ class unittesting {
 		return msgreport
 	}
 
+
 	writeTestResultsToFile(param_filepath:="") {
 		if (A_IsCompiled) {
 			return 0
@@ -204,7 +211,7 @@ class unittesting {
 		} else {
 			logpath := this.logresult_dir
 		}
-		
+
 		FileDelete, % logpath
 		msgreport := this.buildreport()
 		FileAppend, %msgreport%, % logpath
@@ -214,6 +221,7 @@ class unittesting {
 		return true
 	}
 
+	; Internal functions
 	_print(param_obj) {
 		if (IsObject(param_obj)) {
 			for key, value in param_obj {
