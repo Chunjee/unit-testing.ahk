@@ -55,8 +55,8 @@ class unittesting {
 			}
 		}
 		this.log.push("Test Number: " this.testTotal "`n")
-		this.log.push("Input1: " param_actual "`n")
-		this.log.push("Input2: " param_expected "`n")
+		this.log.push("Expected: " param_expected "`n")
+		this.log.push("Actual: " param_actual "`n")
 	}
 
 
