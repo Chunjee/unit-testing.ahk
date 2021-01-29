@@ -1,52 +1,66 @@
 class unittesting {
 
 	__New() {
-		this.testtotal := 0
-		this.failtotal := 0
-		this.successtotal := 0
+		this.testTotal := 0
+		this.failTotal := 0
+		this.successTotal := 0
 
 		this.log := []
 		this.Info_Array := []
 
 		this.labelvar := ""
 		this.lastlabelvar := ""
+		this.category := ""
 
 		this.logresult_dir := A_ScriptDir "\result.tests.log"
 	}
 
 
-	test(para_actual, para_expected) {
+	test(param_actual:="__UNDEFINED__", param_expected:="__UNDEFINED__") {
 		if (A_IsCompiled) {
 			return 0
 		}
 
-		if (IsObject(para_actual)) {
-			para_actual := this._print(para_actual)
+		if (IsObject(param_actual)) {
+			param_actual := this._print(param_actual)
 		}
-		if (IsObject(para_expected)) {
-			para_expected := this._print(para_expected)
+		if (IsObject(param_expected)) {
+			param_expected := this._print(param_expected)
 		}
 
-		this.testtotal += 1
-		if (para_actual = para_expected) {
-			this.successtotal++
-			return true
-		} else {
-			this.failtotal++
-			if (this.labelvar != this.lastlabelvar) {
-				this.lastlabelvar := this.labelvar
-				this.log.push("`n== " this.labelvar " ==`n")
-			}
-			this.log.push("Test Number: " this.testtotal "`n")
-			this.log.push("Expected: " para_expected "`n")
-			this.log.push("Actual: " para_actual "`n")
+		this.testTotal++
+		if (param_actual != param_expected) {
+			this._logTestFail(param_actual, param_expected)
 			this.log.push("`n")
 			return false
+		} else {
+			this.successTotal++
+			return true
+
 		}
 	}
 
+	_logTestFail(param_actual, param_expected) {
+		if (A_IsCompiled) {
+			return 0
+		}
 
-	true(param_actual) {
+		this.failTotal++
+		if (this.labelvar != this.lastlabelvar) {
+			this.lastlabelvar := this.labelvar
+			if (this.category) {
+				this.log.push("`n== " this.category " - " this.labelvar " ==`n")
+			} else {
+				this.log.push("`n== " this.labelvar " ==`n")
+			}
+		}
+		this.log.push("Test Number: " this.testTotal "`n")
+		this.log.push("Input1: " param_actual "`n")
+		this.log.push("Input2: " param_expected "`n")
+	}
+
+
+	true(param_actual:="__UNDEFINED__") {
 		if (A_IsCompiled) {
 			return 0
 		}
@@ -64,7 +78,7 @@ class unittesting {
 	}
 
 
-	false(param_actual) {
+	false(param_actual:="__UNDEFINED__") {
 		if (A_IsCompiled) {
 			return 0
 		}
@@ -82,7 +96,7 @@ class unittesting {
 	}
 
 
-	equal(param_actual, param_expected) {
+	equal(param_actual:="__UNDEFINED__", param_expected:="__UNDEFINED__") {
 		if (A_IsCompiled) {
 			return 0
 		}
@@ -91,7 +105,7 @@ class unittesting {
 	}
 
 
-	notEqual(param_actual, param_expected) {
+	notEqual(param_actual:="__UNDEFINED__", param_expected:="__UNDEFINED__") {
 		if (A_IsCompiled) {
 			return 0
 		}
@@ -99,20 +113,12 @@ class unittesting {
 		param_actual := this._print(param_actual)
 		param_expected := this._print(param_expected)
 
-
-		this.testtotal += 1
+		this.testTotal += 1
 		if (param_actual != param_expected) {
-			this.successtotal++
+			this.successTotal++
 			return true
 		} else {
-			this.failtotal++
-			if (this.labelvar != this.lastlabelvar) {
-				this.lastlabelvar := this.labelvar
-				this.log.push("`n== " this.labelvar " ==`n")
-			}
-			this.log.push("Test Number: " this.testtotal "`n")
-			this.log.push("Input1: " param_actual "`n")
-			this.log.push("Input2: " param_expected "`n")
+			this._logTestFail(param_actual, param_expected)
 			this.log.push("They were Expected to be DIFFERENT")
 			this.log.push("`n")
 			return false
@@ -120,12 +126,12 @@ class unittesting {
 	}
 
 
-	undefined(param_actual) {
+	undefined(param_actual:="__UNDEFINED__") {
 		if (A_IsCompiled) {
 			return 0
 		}
 
-		this.testtotal += 1
+		this.testTotal += 1
 		if (IsObject(param_actual)) {
 			param_actual := this._print(param_actual)
 			if (StrLen(param_actual) > 0) {
@@ -133,25 +139,22 @@ class unittesting {
 			}
 		}
 		if (param_actual != "") {
-			this.failtotal++
-			this.log.push("`n== " this.labelvar " ==`n")
-			this.log.push("Test Number: " this.testtotal "`n")
-			this.log.push("Input: " param_actual "`n")
-			this.log.push("Expected to be """"")
+			this._logTestFail(param_actual, """""")
+			this.log.push("`n")
 			return false
 		} else {
-			this.successtotal++
+			this.successTotal++
 			return true
 		}
 	}
 
 
-	label(para_label) {
+	label(param_label) {
 		if (A_IsCompiled) {
 			return 0
 		}
 
-		this.labelvar :=  para_label
+		this.labelvar :=  param_label
 		return
 	}
 
@@ -160,13 +163,12 @@ class unittesting {
 		if (A_IsCompiled) {
 			return 0
 		}
-
-		this.percentsuccess := floor( ( this.successtotal / this.testtotal ) * 100 )
-		returntext := this.testtotal " tests completed with " this.percentsuccess "% success (" this.failtotal " failures)"
-		if (this.failtotal = 1) {
+		this.percentsuccess := floor( ( this.successTotal / this.testTotal ) * 100 )
+		returntext := this.testTotal " tests completed with " this.percentsuccess "% success (" this.failTotal " failures)"
+		if (this.failTotal = 1) {
 			returntext := StrReplace(returntext, "failures", "failure")
 		}
-		if (this.testtotal = 1) {
+		if (this.testTotal = 1) {
 			returntext := StrReplace(returntext, "tests", "test")
 		}
 		return returntext
@@ -189,7 +191,7 @@ class unittesting {
 		}
 
 		msgreport := this.buildreport()
-		if (this.failtotal > 0) {
+		if (this.failTotal > 0) {
 			msgreport .= "`n=================================`n"
 		}
 
