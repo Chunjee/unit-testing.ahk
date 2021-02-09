@@ -15,11 +15,12 @@ class unittesting {
 	}
 
 
-	test(param_actual:="__UNDEFINED__", param_expected:="__UNDEFINED__") {
+	test(param_actual:="_Missing_Parameter_", param_expected:="_Missing_Parameter_") {
 		if (A_IsCompiled) {
 			return 0
 		}
 
+		; prepare
 		if (IsObject(param_actual)) {
 			param_actual := this._print(param_actual)
 		}
@@ -27,10 +28,10 @@ class unittesting {
 			param_expected := this._print(param_expected)
 		}
 
+		; create
 		this.testTotal++
 		if (param_actual != param_expected) {
 			this._logTestFail(param_actual, param_expected)
-			this.log.push("`n")
 			return false
 		} else {
 			this.successTotal++
@@ -39,11 +40,12 @@ class unittesting {
 		}
 	}
 
-	_logTestFail(param_actual, param_expected) {
+	_logTestFail(param_actual, param_expected, param_msg:="") {
 		if (A_IsCompiled) {
 			return 0
 		}
 
+		; create
 		this.failTotal++
 		if (this.label != this.lastlabel) {
 			this.lastlabel := this.label
@@ -56,14 +58,20 @@ class unittesting {
 		this.log.push("Test Number: " this.testTotal "`n")
 		this.log.push("Expected: " param_expected "`n")
 		this.log.push("Actual: " param_actual "`n")
+		if (param_msg != "") {
+			this.log.push(param_msg "`n")
+		} else {
+			this.log.push("`n")
+		}
 	}
 
 
-	true(param_actual:="__UNDEFINED__") {
+	true(param_actual:="_Missing_Parameter_") {
 		if (A_IsCompiled) {
 			return 0
 		}
 
+		; create
 		if (param_actual == true) {
 			this.test("true", "true")
 			return true
@@ -77,11 +85,12 @@ class unittesting {
 	}
 
 
-	false(param_actual:="__UNDEFINED__") {
+	false(param_actual:="_Missing_Parameter_") {
 		if (A_IsCompiled) {
 			return 0
 		}
 
+		; create
 		if (param_actual == false) {
 			this.test("false", "false")
 			return true
@@ -95,51 +104,55 @@ class unittesting {
 	}
 
 
-	equal(param_actual:="__UNDEFINED__", param_expected:="__UNDEFINED__") {
+	equal(param_actual:="_Missing_Parameter_", param_expected:="_Missing_Parameter_") {
 		if (A_IsCompiled) {
 			return 0
 		}
 
+		; create
 		return this.test(param_actual, param_expected)
 	}
 
 
-	notEqual(param_actual:="__UNDEFINED__", param_expected:="__UNDEFINED__") {
+	notEqual(param_actual:="_Missing_Parameter_", param_expected:="_Missing_Parameter_") {
 		if (A_IsCompiled) {
 			return 0
 		}
 
+		; prepare
 		param_actual := this._print(param_actual)
 		param_expected := this._print(param_expected)
 
+		; create
 		this.testTotal += 1
 		if (param_actual != param_expected) {
 			this.successTotal++
 			return true
 		} else {
-			this._logTestFail(param_actual, param_expected)
-			this.log.push("They were Expected to be DIFFERENT")
-			this.log.push("`n")
+			this._logTestFail(param_actual, param_expected, "They were Expected to be DIFFERENT")
+
 			return false
 		}
 	}
 
 
-	undefined(param_actual:="__UNDEFINED__") {
+	Missing_Parameter(param_actual:="_Missing_Parameter_") {
 		if (A_IsCompiled) {
 			return 0
 		}
 
-		this.testTotal += 1
+		; prepare
 		if (IsObject(param_actual)) {
 			param_actual := this._print(param_actual)
 			if (StrLen(param_actual) > 0) {
 				param_actual := "(Object)"
 			}
 		}
+
+		; create
+		this.testTotal += 1
 		if (param_actual != "") {
 			this._logTestFail(param_actual, """""")
-			this.log.push("`n")
 			return false
 		} else {
 			this.successTotal++
@@ -169,6 +182,8 @@ class unittesting {
 		if (A_IsCompiled) {
 			return 0
 		}
+
+		; create
 		this.percentsuccess := floor( ( this.successTotal / this.testTotal ) * 100 )
 		returntext := this.testTotal " tests completed with " this.percentsuccess "% success (" this.failTotal " failures)"
 		if (this.failTotal = 1) {
@@ -200,11 +215,16 @@ class unittesting {
 		if (this.failTotal > 0) {
 			msgreport .= "`n=================================`n"
 		}
-
 		loop % this.log.Count() {
 			msgreport .= this.log[A_Index]
 		}
-		msgbox % msgreport
+
+		if (this.failTotal > 0) {
+			l_options := 48
+		} else {
+			l_options := 64
+		}
+			msgbox, % l_options, unit-testing.ahk, % msgreport
 		return msgreport
 	}
 
@@ -214,12 +234,14 @@ class unittesting {
 			return 0
 		}
 
+		; prepare
 		if (param_filepath != "") {
 			logpath := param_filepath
 		} else {
 			logpath := this.logresult_dir
 		}
 
+		; create
 		FileDelete, % logpath
 		msgreport := this.buildreport()
 		FileAppend, %msgreport%, % logpath
