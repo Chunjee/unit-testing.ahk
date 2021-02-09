@@ -6,11 +6,10 @@ class unittesting {
 		this.successTotal := 0
 
 		this.log := []
-		this.Info_Array := []
 
-		this.labelvar := ""
-		this.lastlabelvar := ""
-		this.category := ""
+		this.group := ""
+		this.label := ""
+		this.lastlabel := ""
 
 		this.logresult_dir := A_ScriptDir "\result.tests.log"
 	}
@@ -46,12 +45,12 @@ class unittesting {
 		}
 
 		this.failTotal++
-		if (this.labelvar != this.lastlabelvar) {
-			this.lastlabelvar := this.labelvar
-			if (this.category) {
-				this.log.push("`n== " this.category " - " this.labelvar " ==`n")
+		if (this.label != this.lastlabel) {
+			this.lastlabel := this.label
+			if (this.group) {
+				this.log.push("`n== " this.group " - " this.label " ==`n")
 			} else {
-				this.log.push("`n== " this.labelvar " ==`n")
+				this.log.push("`n== " this.label " ==`n")
 			}
 		}
 		this.log.push("Test Number: " this.testTotal "`n")
@@ -153,16 +152,16 @@ class unittesting {
 			return 0
 		}
 
-		this.labelvar :=  param
+		this.label := param
 		return
 	}
 
-	category(param) {
+	group(param) {
 		if (A_IsCompiled) {
 			return 0
 		}
 
-		this.category :=  param
+		this.group := param
 		return
 	}
 
