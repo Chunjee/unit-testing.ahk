@@ -7,8 +7,8 @@ class unittesting {
 
 		this.log := []
 
-		this.group := ""
-		this.label := ""
+		this.groupVar := ""
+		this.labelVar := ""
 		this.lastlabel := ""
 
 		this.logresult_dir := A_ScriptDir "\result.tests.log"
@@ -47,12 +47,12 @@ class unittesting {
 
 		; create
 		this.failTotal++
-		if (this.label != this.lastlabel) {
-			this.lastlabel := this.label
-			if (this.group) {
-				this.log.push("`n== " this.group " - " this.label " ==`n")
+		if (this.labelVar != this.lastlabel) {
+			this.lastlabel := this.labelVar
+			if (this.groupVar) {
+				this.log.push("`n== " this.groupVar " - " this.labelVar " ==`n")
 			} else {
-				this.log.push("`n== " this.label " ==`n")
+				this.log.push("`n== " this.labelVar " ==`n")
 			}
 		}
 		this.log.push("Test Number: " this.testTotal "`n")
@@ -60,9 +60,8 @@ class unittesting {
 		this.log.push("Actual: " param_actual "`n")
 		if (param_msg != "") {
 			this.log.push(param_msg "`n")
-		} else {
-			this.log.push("`n")
 		}
+		this.log.push("`n")
 	}
 
 
@@ -135,37 +134,12 @@ class unittesting {
 		}
 	}
 
-
-	Missing_Parameter(param_actual:="_Missing_Parameter_") {
-		if (A_IsCompiled) {
-			return 0
-		}
-
-		; prepare
-		if (IsObject(param_actual)) {
-			param_actual := this._print(param_actual)
-			if (StrLen(param_actual) > 0) {
-				param_actual := "(Object)"
-			}
-		}
-
-		; create
-		this.testTotal += 1
-		if (param_actual != "") {
-			this._logTestFail(param_actual, """""")
-			return false
-		} else {
-			this.successTotal++
-			return true
-		}
-	}
-
 	label(param) {
 		if (A_IsCompiled) {
 			return 0
 		}
 
-		this.label := param
+		this.labelVar := param
 		return
 	}
 
@@ -174,7 +148,7 @@ class unittesting {
 			return 0
 		}
 
-		this.group := param
+		this.groupVar := param
 		return
 	}
 
@@ -224,7 +198,8 @@ class unittesting {
 		} else {
 			l_options := 64
 		}
-			msgbox, % l_options, unit-testing.ahk, % msgreport
+		this._stdOut(msgreport)
+		msgbox, % l_options, unit-testing.ahk, % msgreport
 		return msgreport
 	}
 
@@ -244,6 +219,7 @@ class unittesting {
 		; create
 		FileDelete, % logpath
 		msgreport := this.buildreport()
+		this._stdOut(msgreport)
 		FileAppend, %msgreport%, % logpath
 		for key, value in this.log {
 			FileAppend, %value%, % logpath
@@ -276,5 +252,16 @@ class unittesting {
 			return output
 		}
 		return param_obj
+	}
+
+	_stdOut(output:="") {
+		try {
+			DllCall("AttachConsole", "int", -1) || DllCall("AllocConsole")
+			FileAppend, % output "`n", CONOUT$
+			DllCall("FreeConsole")
+		} catch error {
+			return false
+		}
+		return true
 	}
 }
