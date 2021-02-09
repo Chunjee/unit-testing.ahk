@@ -152,30 +152,13 @@ class unittesting {
 		return
 	}
 
-	buildReport() {
-		if (A_IsCompiled) {
-			return 0
-		}
-
-		; create
-		this.percentsuccess := floor( ( this.successTotal / this.testTotal ) * 100 )
-		returntext := this.testTotal " tests completed with " this.percentsuccess "% success (" this.failTotal " failures)"
-		if (this.failTotal = 1) {
-			returntext := StrReplace(returntext, "failures", "failure")
-		}
-		if (this.testTotal = 1) {
-			returntext := StrReplace(returntext, "tests", "test")
-		}
-		return returntext
-	}
-
 
 	report() {
 		if (A_IsCompiled) {
 			return 0
 		}
 
-		msgbox, % this.buildreport()
+		msgbox, % this._buildReport()
 		return true
 	}
 
@@ -185,7 +168,7 @@ class unittesting {
 			return 0
 		}
 
-		msgreport := this.buildreport()
+		msgreport := this._buildReport()
 		if (this.failTotal > 0) {
 			msgreport .= "`n=================================`n"
 		}
@@ -218,7 +201,7 @@ class unittesting {
 
 		; create
 		FileDelete, % logpath
-		msgreport := this.buildreport()
+		msgreport := this._buildReport()
 		FileAppend, %msgreport%, % logpath
 		for key, value in this.log {
 			FileAppend, %value%, % logpath
@@ -227,6 +210,24 @@ class unittesting {
 	}
 
 	; Internal functions
+	_buildReport() {
+		if (A_IsCompiled) {
+			return 0
+		}
+
+		; create
+		this.percentsuccess := floor( ( this.successTotal / this.testTotal ) * 100 )
+		returntext := this.testTotal " tests completed with " this.percentsuccess "% success (" this.failTotal " failures)"
+		if (this.failTotal = 1) {
+			returntext := StrReplace(returntext, "failures", "failure")
+		}
+		if (this.testTotal = 1) {
+			returntext := StrReplace(returntext, "tests", "test")
+		}
+		return returntext
+	}
+
+
 	_print(param_obj) {
 		if (IsObject(param_obj)) {
 			for key, value in param_obj {

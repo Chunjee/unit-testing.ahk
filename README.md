@@ -25,7 +25,7 @@ You may also review or copy the library from [./export.ahk on GitHub](https://gi
 
 ## Usage
 
-Grants access to a class named `unittesting` with the following methods: `.equal`, `.true`, `.false`, `.notEqual`, `.label`, `.report`, `.fullReport`, and `.writeTestResultsToFile`
+Grants access to a class named `unittesting` with the following methods: `.equal`, `.notEqual`, `.true`, `.false`, `.label`, `.group`, `.report`, `.fullReport`, and `.writeTestResultsToFile`
 
 ```autohotkey
 assert := new unittesting()
