@@ -219,7 +219,6 @@ class unittesting {
 		; create
 		FileDelete, % logpath
 		msgreport := this.buildreport()
-		this._stdOut(msgreport)
 		FileAppend, %msgreport%, % logpath
 		for key, value in this.log {
 			FileAppend, %value%, % logpath
