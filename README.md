@@ -122,10 +122,10 @@ checks if actual and expected are NOT the same or equal. The comparison is case-
 
 ##### Example
 ```autohotkey
-assert.false((1 != 1))
+assert.notEqual((1 != 1))
 ; => true
 
-assert.false(InStr("String", "X"))
+assert.notEqual(InStr("String", "X"))
 ; => true
 ```
 
@@ -169,6 +169,40 @@ assert.fullReport()
 Test Number: 1
 Expected: s
 Actual: String
+---------------------------*/
+```
+
+### .group(label)
+appends the label to a group of following tests for logs and readability
+
+This may be useful when one has a lot of tests; and doesn't want to type out a repeatative label
+
+##### Arguments
+1. label (string): A human readable label prepend for the next test(s) in sequence
+
+
+##### Example
+```autohotkey
+assert.group("strings")
+assert.label("comparison")
+assert.equal("String", "s")
+
+assert.label("length")
+assert.equal(strLen("String"), 9)
+
+assert.fullReport()
+/*---------------------------
+2 tests completed with 0% success (2 failures)
+=================================
+== strings - comparisons ==
+Test Number: 1
+Expected: s
+Actual: String
+
+== strings - length ==
+Test Number: 2
+Expected: 99
+Actual: 6
 ---------------------------*/
 ```
 
