@@ -1,13 +1,13 @@
 {
-    "name": "unit-testing.ahk",
-    "version": "0.6.1",
-    "description": "Simple unit testing class to perform and report tests for AutoHotkey projects",
-    "main": "export.ahk",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/Chunjee/unit-testing.ahk.git"
-    },
-    "dependencies": { },
-    "author": "Shawn Brooker",
-    "license": "MIT"
+	"name": "unit-testing.ahk",
+	"version": "0.6.1",
+	"description": "Simple unit testing class to perform and report tests for AutoHotkey projects",
+	"main": "export.ahk",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Chunjee/unit-testing.ahk.git"
+	},
+	"dependencies": {},
+	"author": "Shawn Brooker",
+	"license": "MIT"
 }
