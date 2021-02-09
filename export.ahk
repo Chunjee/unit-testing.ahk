@@ -148,16 +148,23 @@ class unittesting {
 		}
 	}
 
-
-	label(param_label) {
+	label(param) {
 		if (A_IsCompiled) {
 			return 0
 		}
 
-		this.labelvar :=  param_label
+		this.labelvar :=  param
 		return
 	}
 
+	category(param) {
+		if (A_IsCompiled) {
+			return 0
+		}
+
+		this.category :=  param
+		return
+	}
 
 	buildReport() {
 		if (A_IsCompiled) {
