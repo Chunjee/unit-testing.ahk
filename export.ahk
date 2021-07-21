@@ -188,7 +188,7 @@ class unittesting {
 	}
 
 
-	writeTestResultsToFile(param_filepath:="") {
+	writeResultsToFile(param_filepath:="", openFile:=0) {
 		if (A_IsCompiled) {
 			return 0
 		}

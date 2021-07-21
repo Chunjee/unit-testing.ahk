@@ -62,6 +62,6 @@ assert.false(!inStr(report, "failures"))
 
 
 ; wrap up
-assert.writeTestResultsToFile()
+assert.writeResultsToFile()
 assert.fullReport()
 ExitApp
