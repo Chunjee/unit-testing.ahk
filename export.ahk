@@ -149,6 +149,7 @@ class unittesting {
 		}
 
 		this.groupVar := param
+		this.labelVar := ""
 		return
 	}
 
