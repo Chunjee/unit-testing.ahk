@@ -201,11 +201,19 @@ class unittesting {
 		}
 
 		; create
-		FileDelete, % logpath
+		try {
+			FileDelete, % logpath
+		} catch {
+			; do nothing
+		}
+		
 		msgreport := this._buildReport()
-		FileAppend, %msgreport%, % logpath
+		FileAppend, % msgreport "`n`n", % logpath
 		for key, value in this.log {
-			FileAppend, %value%, % logpath
+			FileAppend, % value, % logpath
+		}
+		if (openFile) {
+			Run, % logpath
 		}
 		return true
 	}

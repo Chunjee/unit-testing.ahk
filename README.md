@@ -239,18 +239,23 @@ Actual: false
 ```
 
 
-### .writeTestResultsToFile([filepath])
+### .writeResultsToFile([filepath, fileopen])
 writes test results to a file
 
 ##### Arguments
 1. filepath (string): Optional, The file path to write all tests results to, the default is `A_ScriptDir "\result.tests.log"`
+
+2. fileopen (bool): Optional, Open the file if true. Default: false
 
 ##### Example
 ```autohotkey
 assert.true(InStr("String", "X"))
 
 assert.writeTestResultsToFile()
-/*Test Number: 1
+/*
+1 test completed with 0% success (1 failure)
+
+Test Number: 1
 Expected: true
 Actual: false*/
 ```
