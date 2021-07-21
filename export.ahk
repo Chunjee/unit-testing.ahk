@@ -150,6 +150,7 @@ class unittesting {
 
 		this.groupVar := param
 		this.labelVar := ""
+		this.lastlabel := "_"
 		return
 	}
 
@@ -177,6 +178,7 @@ class unittesting {
 			msgreport .= this.log[A_Index]
 		}
 
+		; choose the msgbox icon
 		if (this.failTotal > 0) {
 			l_options := 48
 		} else {
