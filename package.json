@@ -1,7 +1,7 @@
 {
 	"name": "unit-testing.ahk",
-	"version": "0.6.1",
-	"description": "Simple unit testing class to perform and report tests for AutoHotkey projects",
+	"version": "0.7.0",
+	"description": "Simple unit testing package to perform and report on tests for AutoHotkey projects",
 	"main": "export.ahk",
 	"repository": {
 		"type": "git",
